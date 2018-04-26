@@ -1,0 +1,26 @@
+ID: xsa_securestore_test
+_schema-version: '2.0'
+version: 0.0.1
+
+modules:
+ - name: node_securestore_test
+   type: nodejs
+   path: node_securestore_test
+   provides:
+    - name: node_securestore_test_api
+      properties:
+         url: ${default-url}
+   requires:
+     - name: securestore_test-uaa
+     - name: securestore_test-db
+         
+resources:
+ - name: securestore_test-uaa
+   type: com.sap.xs.uaa-space
+   parameters:
+     config_path: ./xs-security.json
+
+ - name: securestore_test-db
+   type: com.sap.xs.hana-securestore
+   parameters:
+     service-name: securestore_test-hana
